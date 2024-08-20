@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Employee</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Add Employee Data</h2>
+        <form id="employee-form">
+            <div class="mb-3">
+                <label for="emp-id" class="form-label">Emp ID</label>
+                <input type="text" class="form-control" id="emp-id" required>
+            </div>
+            <div class="mb-3">
+                <label for="data2" class="form-label">Data 2</label>
+                <input type="text" class="form-control" id="data2" required>
+            </div>
+            <div class="mb-3">
+                <label for="data3" class="form-label">Data 3</label>
+                <input type="text" class="form-control" id="data3" required>
+            </div>
+            <div class="mb-3">
+                <label for="data4" class="form-label">Data 4</label>
+                <input type="text" class="form-control" id="data4" required>
+            </div>
+            <div class="mb-3">
+                <label for="data5" class="form-label">Data 5</label>
+                <input type="text" class="form-control" id="data5" required>
+            </div>
+            <button type="submit" class="btn btn-primary">ADD</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('employee-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Get form data
+            const empId = document.getElementById('emp-id').value;
+            const data2 = document.getElementById('data2').value;
+            const data3 = document.getElementById('data3').value;
+            const data4 = document.getElementById('data4').value;
+            const data5 = document.getElementById('data5').value;
+
+            // Store the new data in localStorage
+            const newRowData = {
+                empId,
+                data2,
+                data3,
+                data4,
+                data5
+            };
+
+            const currentData = JSON.parse(localStorage.getItem('employeeData')) || [];
+            currentData.push(newRowData);
+            localStorage.setItem('employeeData', JSON.stringify(currentData));
+
+            // Redirect back to index.html
+            window.location.href = '../index.html';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Employee Data</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Edit Employee Data</h2>
+        <form id="edit-form">
+            <div class="mb-3">
+                <label for="emp-id" class="form-label">Emp ID</label>
+                <input type="text" class="form-control" id="emp-id" required>
+            </div>
+            <div class="mb-3">
+                <label for="data2" class="form-label">Data 2</label>
+                <input type="text" class="form-control" id="data2" required>
+            </div>
+            <div class="mb-3">
+                <label for="data3" class="form-label">Data 3</label>
+                <input type="text" class="form-control" id="data3" required>
+            </div>
+            <div class="mb-3">
+                <label for="data4" class="form-label">Data 4</label>
+                <input type="text" class="form-control" id="data4" required>
+            </div>
+            <div class="mb-3">
+                <label for="data5" class="form-label">Data 5</label>
+                <input type="text" class="form-control" id="data5" required>
+            </div>
+            <button type="submit" class="btn btn-success">DONE</button>
+        </form>
+    </div>
+
+    <script>
+        // Retrieve the row data from localStorage
+        const rowData = JSON.parse(localStorage.getItem('editRowData'));
+
+        // Populate the form fields with the retrieved data
+        document.getElementById('emp-id').value = rowData.empId;
+        document.getElementById('data2').value = rowData.data2;
+        document.getElementById('data3').value = rowData.data3;
+        document.getElementById('data4').value = rowData.data4;
+        document.getElementById('data5').value = rowData.data5;
+
+        document.getElementById('edit-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Get the updated data from the form
+            const updatedRowData = {
+                empId: document.getElementById('emp-id').value,
+                data2: document.getElementById('data2').value,
+                data3: document.getElementById('data3').value,
+                data4: document.getElementById('data4').value,
+                data5: document.getElementById('data5').value,
+            };
+
+            // Update the localStorage with the new data
+            const employeeData = JSON.parse(localStorage.getItem('employeeData')) || [];
+            const index = employeeData.findIndex(emp => emp.empId === rowData.empId);
+            if (index > -1) {
+                employeeData[index] = updatedRowData; // Update the row data
+            }
+
+            localStorage.setItem('employeeData', JSON.stringify(employeeData));
+
+            // Redirect back to index.html
+            window.location.href = '../index.html';
+        });
+    </script>
+</body>
+</html>
