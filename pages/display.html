@@ -38,14 +38,12 @@
         document.getElementById('employee-form').addEventListener('submit', function(event) {
             event.preventDefault();
             
-            // Get form data
             const empId = document.getElementById('emp-id').value;
             const data2 = document.getElementById('data2').value;
             const data3 = document.getElementById('data3').value;
             const data4 = document.getElementById('data4').value;
             const data5 = document.getElementById('data5').value;
 
-            // Store the new data in localStorage
             const newRowData = {
                 empId,
                 data2,
@@ -58,7 +56,6 @@
             currentData.push(newRowData);
             localStorage.setItem('employeeData', JSON.stringify(currentData));
 
-            // Redirect back to index.html
             window.location.href = '../index.html';
         });
     </script>
